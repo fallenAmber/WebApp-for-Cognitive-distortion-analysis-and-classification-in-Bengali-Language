@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cognitive distortion Detection App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #div1 {
+            width: 40%;
+            font-size: 20px;
+            float: left;
+            margin-top: 20px;
+        }
+
+        #div2 {
+            width: 60%;
+            font-size: large;
+            float: right;
+            margin-top: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 20px;
+        }
+
+        input[type="button"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #007BFF;
+            font-size: 30px;
+            margin-top: 0%;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Cognitive Distortion Detection App</h1>
+
+    <div id="div1" class="header1">
+
+        <form id="commentForm">
+            <label for="comment">Enter your comment:</label><br>
+            <textarea id="comment" name="comment" rows="8" cols="50"></textarea><br>
+            <input type="button" value="Predict" onclick="predictCognitiveDistortions()">
+        </form>
+
+    </div>
+
+    <div id="div2">
+
+        <h2>Results:</h2>
+        <p id="resultOvergeneralization"></p>
+        <p id="resultAllOrNoneThinking"></p>
+        <p id="resultMindReading"></p>
+        <p id="resultFortuneTellingError"></p>
+        <p id="resultLabeling"></p>
+        <p id="resultShouldStatement"></p>
+        <p id="resultEmotionalReasoning"></p>
+        <p id="resultPersonalization"></p>
+
+    </div>
+
+    <script>
+        function predictCognitiveDistortions() {
+            // Get the comment entered by the user
+            var comment = document.getElementById("comment").value;
+
+            // Send the comment to the web app for prediction
+            fetch("/predict", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "comment": comment
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the prediction results on the web page
+                    var resultElementOvergeneralization = document.getElementById("resultOvergeneralization");
+                    resultElementOvergeneralization.innerHTML = data.result_overgeneralization;
+
+                    var resultElementAllOrNoneThinking = document.getElementById("resultAllOrNoneThinking");
+                    resultElementAllOrNoneThinking.innerHTML = data.result_all_or_none_thinking;
+
+                    var resultElementMindReading = document.getElementById("resultMindReading");
+                    resultElementMindReading.innerHTML = data.result_mind_reading;
+
+                    var resultElementFortuneTellingError = document.getElementById("resultFortuneTellingError");
+                    resultElementFortuneTellingError.innerHTML = data.result_fortune_telling_error;
+
+                    var resultElementLabeling = document.getElementById("resultLabeling");
+                    resultElementLabeling.innerHTML = data.result_labeling;
+
+                    var resultElementShouldStatement = document.getElementById("resultShouldStatement");
+                    resultElementShouldStatement.innerHTML = data.result_should_statement;
+
+                    var resultElementEmotionalReasoning = document.getElementById("resultEmotionalReasoning");
+                    resultElementEmotionalReasoning.innerHTML = data.result_emotional_reasoning;
+
+                    var resultElementPersonalization = document.getElementById("resultPersonalization");
+                    resultElementPersonalization.innerHTML = data.result_personalization;
+
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+</body>
+
+</html>
