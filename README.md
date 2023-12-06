@@ -5,7 +5,7 @@ Developed some deep learning models from the ground up based on the Recurrent Ne
 
 # Dataset
 For training models to detect different cognitive distortions, a relatively large dataset of 4400 comments was constructed. Three dedicated annotators collected them from comments in online news portals on Facebook from the posts from 1 January 2023 to 31 June 2023. They collected data from four of Bangladesh's most commented Bangla news portals. They are shown in the following table.
-# A glimpse inot the WebApp
+# A glimpse into the WebApp
 
 ![image](https://github.com/fallenAmber/WebApp-for-Cognitive-distortion-analysis-and-classification-in-Bengali-Language/assets/48941639/b456957e-a4a8-4239-ace1-a83820f4f881)
 
